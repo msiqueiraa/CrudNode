@@ -7,10 +7,11 @@
 4. executar app.js
 
 #### Rotas:
-* [localhost:3000/registration] para registrar um novo usuário.
-* [localhost:3000/updateUser] para atualizar um usuário.
-* [localhost:3000/searchUser] para visualizar um usuário em específico.
-* [localhost:3000/deleteUser] para deletar um usuário em específico.
+* [localhost:3000/registration] post - para registrar um novo usuário.
+* [localhost:3000/updateUser] put -para atualizar um usuário.
+* [localhost:3000/searchUser] get - para visualizar um usuário em específico.
+* [localhost:3000/deleteUser] delete - para deletar um usuário em específico.
+* [localhost:3000/api] swagger - documentação da API.
 
 #### Dados para teste:
 ~~~JSON
@@ -21,3 +22,4 @@
   "dataNascimento":"2022-09-19"
 }
 ~~~
+

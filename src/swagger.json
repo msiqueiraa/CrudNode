@@ -1,0 +1,215 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CRUD user App",
+        "description": "Server para criação de usuário no banco de dados",
+        "contact": {
+            "name": "GitHub of Dev",
+            "url": "https://github.com/msiqueiraa"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Test API"
+        }
+    ],
+    "paths": {
+        "/registration": {
+            "post": {
+                "summary": "Cadastro de usuário",
+                "description": "Essa rota será responsável pelo cadastro de usuários.",
+                "tags": [
+                    "User"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUser"
+                            },
+                            "examples": {
+                                "CreateUser": {
+                                    "value": {
+                                        "nome": "Matheus Siqueira",
+                                        "senha": "1234",
+                                        "email": "matheusiqueira@mail.com",
+                                        "dataNascimento": "2022-09-19"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description":"Usuário já existe ou preenchido de forma incorreta."
+                    },
+                    "201":{"description":"Usuário cadastrado",
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type":"object",
+                            "$ref":"#/components/schemas/UpdateUser"
+                        }
+                    }
+                }
+                }
+                }
+            }
+        },
+        "/searchUser":{
+            "get":{
+                "description":"Busca de um usuário pelo e-mail",
+                "summary":"Busca de um usuário pelo email",
+                "tags":["User"],
+                "parameters":[{
+                    "name":"email",
+                    "in":"query",
+                    "description":"Email do usuário a ser buscado",
+                    "required":"true"
+                }]
+                    
+            ,
+            "responses":{
+                "500":{"description":"Erro interno no servidor"},
+                "403":{"description":"Usuário não encontrado"},
+                "200":{"description": "Usuário encontrado",
+            "content":{
+                "application/json":{
+                    "schema":{
+                        "type":"object",
+                        "$ref":"#/components/schemas/UpdateUser"
+                    }
+                }
+            }}
+            }
+        }
+    },
+    "/updateUser":{
+        "put":{
+            "summary":"Atualização de usuário",
+            "description":"Rota responsável pela atualização do usuário",
+            "tags":["User"],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/UpdateUser"
+                        },
+                        "examples": {
+                            "CreateUser": {
+                                "value": {
+                                    "_id":"632a25c6f1a2811490a50662",
+                                    "nome": "Matheus Siqueira",
+                                    "senha": "1234",
+                                    "email": "matheusiqueira@mail.com",
+                                    "dataNascimento": "2022-09-19"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "403":{"description":"Id incorreto"},
+                "200":{"description":"Usuário atualizado"},
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type":"object",
+                            "$ref":"#/components/schemas/UpdateUser"
+                        }
+                    }
+                }
+            }
+
+        }
+    },
+    "/deleteUser":{
+        "delete":{
+            "summary":"Exclusão de usuário",
+            "description":"Rota responsável pela exclusão do usuário",
+            "tags":["User"],
+            "requestBody": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/DeleteUser"
+                        },
+                        "examples": {
+                            "CreateUser": {
+                                "value": {
+                                    "_id":"632a25c6f1a2811490a50662"                                 
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "403":{"description":"Id incorreto"},
+                "200":{"description":"Usuário deletado"}               
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateUser": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "dataNascimento": {
+                        "type": "date"
+                    }
+                }
+            },
+            "searchUser":{
+                "type":"object",
+                "properties":{
+                    "email":{"type":"string"}
+                }
+            },
+            "UpdateUser": {
+                "type": "object",
+                "properties": {
+                    "_id":{
+                        "type":"string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "dataNascimento": {
+                        "type": "date"
+                    }
+                }
+            },
+            "DeleteUser":{
+                "type":"object",
+                "properties":{
+                    "_id":{
+                        "type":"string"
+                    }
+                }
+            }
+        
+        }
+    }
+
+}

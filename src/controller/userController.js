@@ -9,7 +9,7 @@ class UserController {
                         return res.status(400).send('erro ao cadastrar usuário')
                     }
                     else {
-                        return res.send('usuário cadastrado')
+                        return res.send('usuário cadastrado. \n' + JSON.stringify(req.body))
                     }
                 })
             }
@@ -23,7 +23,7 @@ class UserController {
     }
 
     static async read(req, res) {
-        const { email } = req.body;
+        var email = req.query.email;
 
         try {
             await userModel.findOne({ email }).exec((err, users) => {
@@ -31,8 +31,8 @@ class UserController {
                     return res.status(500);
                 }
 
-                if (!users) {
-                    return res.status(403);
+                if (users === null) {
+                    return res.status(403).send("Usuário inexistente");
                 }
 
                 else {
@@ -49,11 +49,11 @@ class UserController {
     static async updateUser(req, res) {
         try {
             await userModel.findByIdAndUpdate(req.body, { nome: req.body.nome, senha: req.body.senha, email: req.body.email, dataNascimento: req.body.dataNascimento }, function (err, _id, _nome, _senha, _email, _dataNascimento) {
-                if (!_id || err) {
-                    res.send("Informe o ID correto.")
+                if (err) {
+                    res.status(403).send("Informe o ID correto.")
                 }
                 else {
-                    res.send("Usuário atualizado").status(200)
+                    res.status(200).send("Usuário atualizado")
                 }
             })
 
@@ -66,9 +66,9 @@ class UserController {
 
     static async deleteUser(req, res) {
         try {
-            await userModel.findByIdAndDelete((req.body._id), function (err) {
+            await userModel.findByIdAndDelete((req.body._id), function (_id, err) {
                 if (err) {
-                    res.send(err)
+                    res.status(403).send("Informe o ID correto.")
                 }
                 else {
                     res.send("Usuário deletado")
