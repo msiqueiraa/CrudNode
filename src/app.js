@@ -1,8 +1,8 @@
 const http = require('http');
 const mongoose = require('mongoose');
-const user = require('../src/routes/userRoute')
+const user = require('./routes/userRoute')
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../src/swagger.json');
+const swaggerDocument = require('./swagger.json');
 
 var express = require('express');
 var app = express();

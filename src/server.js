@@ -1,9 +1,6 @@
 const hostname = 'localhost';
 const port = 3000;
-const server = require('./bin/www')
+const server = require('./app')
 
 server.listen(port, hostname, () => {
 });
-
-
-
