@@ -15,7 +15,7 @@ class UserController {
             const response = await userService.readOne(req);
             return res.status(200).json(response);
         } catch (err) {
-            return res.status(400).send(err);
+            return res.status(400).json(err);
         }
     }
 
@@ -24,7 +24,7 @@ class UserController {
             const response = await userService.update(req);
             return res.status(200).json(response);
         } catch (err) {
-            return res.status(400).send(err);
+            return res.status(400).json(err);
         }
     }
 
@@ -33,7 +33,7 @@ class UserController {
             const response = await userService.remove(req);
             return res.status(204).send();
         } catch (err) {
-            return res.status(400).send(err);
+            return res.status(400).json(err);
         }
     }
 }
