@@ -1,7 +1,7 @@
 const userRepository = require('../repository/user.repository');
 const userModel = new userRepository();
 
-async function createUserService(bodyRequest) {
+async function create(bodyRequest) {
     const result = await userModel.newModel(bodyRequest);
 
     if (result === 400) {
@@ -13,7 +13,7 @@ async function createUserService(bodyRequest) {
     }
 }
 
-async function readOneUserService(queryRequest) {
+async function readOne(queryRequest) {
     const result = await userModel.readModel(queryRequest);
     if (result === 400) {
         return { statusRes: 400, text: 'erro ao procurar usuário' };
@@ -24,7 +24,7 @@ async function readOneUserService(queryRequest) {
     }
 }
 
-async function updateUserService(bodyRequest) {
+async function update(bodyRequest) {
     const result = await userModel.updateModel(bodyRequest);
     if (result === 404) {
         return { statusRes: 404, text: 'informe o ID correto' };
@@ -35,7 +35,7 @@ async function updateUserService(bodyRequest) {
     }
 }
 
-async function deleteUserService(bodyRequest) {
+async function remove(bodyRequest) {
     const result = await userModel.deleteModel(bodyRequest);
     if (result === 200) {
         return { statusRes: 200, text: 'Usuário deletado' };
@@ -45,9 +45,10 @@ async function deleteUserService(bodyRequest) {
         return { statusRes: 500, text: 'erro desconhecido' };
     }
 }
+
 module.exports = {
-    createUserService,
-    readOneUserService,
-    updateUserService,
-    deleteUserService,
+    create,
+    readOne,
+    update,
+    remove,
 };
