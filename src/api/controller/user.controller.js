@@ -1,27 +1,40 @@
+const { json } = require('express');
 const userService = require('../service/user.service');
 class UserController {
     static async create(req, res) {
-        const response = await userService.create(req.body);
-        const { statusRes, text } = response;
-        res.status(statusRes).send(text);
+        try {
+            const response = await userService.create(req);
+            return res.status(201).json(response);
+        } catch (err) {
+            return res.status(400).send(err);
+        }
     }
 
     static async readOne(req, res) {
-        const response = await userService.readOne(req.query.email);
-        const { statusRes, text } = response;
-        res.status(statusRes).send(text);
+        try {
+            const response = await userService.readOne(req);
+            return res.status(200).json(response);
+        } catch (err) {
+            return res.status(400).send(err);
+        }
     }
 
     static async update(req, res) {
-        const response = await userService.update(req.body);
-        const { statusRes, text } = response;
-        res.status(statusRes).send(text);
+        try {
+            const response = await userService.update(req);
+            return res.status(200).json(response);
+        } catch (err) {
+            return res.status(400).send(err);
+        }
     }
 
     static async remove(req, res) {
-        const response = await userService.remove(req.body);
-        const { statusRes, text } = response;
-        res.status(statusRes).send(text);
+        try {
+            const response = await userService.remove(req);
+            return res.status(204).send();
+        } catch (err) {
+            return res.status(400).send(err);
+        }
     }
 }
 
