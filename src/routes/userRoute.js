@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../api/controller/userController');
 
-router.post('/registration', userController.store);
-router.get('/searchUser', userController.read);
-router.put('/updateUser', userController.updateUser);
-router.delete('/deleteUser', userController.deleteUser);
+router.post('/user', userController.store);
+router.get('/user', userController.read);
+router.put('/user', userController.updateUser);
+router.delete('/user', userController.deleteUser);
 
 module.exports = router;

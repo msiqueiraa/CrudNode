@@ -10,7 +10,7 @@ http.createServer(app)
 
 app.use(express.json())
 app.use('/', user)
-app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 mongoose.connect('mongodb://localhost:27017/test').then(() => {
   console.log("Conectado com o DB")

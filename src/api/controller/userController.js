@@ -1,4 +1,4 @@
-const userModel = require("../model/user");
+const userModel = require("../model/userModel");
 const userService = require("../service/userService")
 class UserController {
     static async store(req, res) {
